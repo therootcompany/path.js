@@ -7,6 +7,8 @@ npm install --save @root/path
 ```
 
 ```js
+var Path = require("@root/path");
+
 // throws error when path resolves to ../...
 Path.join("foo", "../bar"); // throws error
 Path.resolve("/foo", "/bar"); // throws error
