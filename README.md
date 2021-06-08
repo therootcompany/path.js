@@ -6,6 +6,13 @@ A secure-by-default path module (wrapper around node's path).
 npm install --save @root/path
 ```
 
+```js
+// throws error when path resolves to ../...
+Path.join("foo", "../bar"); // throws error
+Path.resolve("/foo", "/bar"); // throws error
+Path.relative("/foo/bar", "/foo"); // throws error
+```
+
 # API
 
 Same as the built-in [`path`](https://nodejs.org/api/path.html),
@@ -14,9 +21,9 @@ or `relative` path is not a child of the `root`, `base`, or `from` path.
 
 ```json
 {
-    "message": "'x' [may] resolve[s] to a different parent than 'y'",
-    "code": "E_PARENT_PATH"
-    "path": "x"
+  "message": "'x' [may] resolve[s] to a different parent than 'y'",
+  "code": "E_PARENT_PATH",
+  "path": "x"
 }
 ```
 
