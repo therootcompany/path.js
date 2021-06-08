@@ -1,9 +1,11 @@
 {
     "name": "@root/path",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A secure-by-default path module (wrapper around node's path)",
     "main": "path.js",
-    "files": ["lib"],
+    "files": [
+        "lib"
+    ],
     "scripts": {
         "test": "node test.js"
     },
@@ -11,7 +13,13 @@
         "type": "git",
         "url": "git+https://github.com/therootcompany/path.js.git"
     },
-    "keywords": ["path", "join", "safe", "secure", "relative"],
+    "keywords": [
+        "path",
+        "join",
+        "safe",
+        "secure",
+        "relative"
+    ],
     "author": "AJ ONeal <coolaj86@gmail.com> (https://coolaj86.com/)",
     "license": "MPL-2.0",
     "bugs": {
