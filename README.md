@@ -6,7 +6,7 @@ A secure-by-default path module (wrapper around node's path).
 npm install --save @root/path
 ```
 
-[![@root-path-thumbnail](https://user-images.githubusercontent.com/122831/122685243-736aac80-d1c7-11eb-81e4-157e58e9f172.jpeg)](https://youtu.be/7JeejK8EDCk)
+[![@root-path-thumbnail-play](https://user-images.githubusercontent.com/122831/122685339-effd8b00-d1c7-11eb-8610-3f3adc16ec3f.jpeg)](https://youtu.be/7JeejK8EDCk)
 
 ```js
 var Path = require("@root/path");
