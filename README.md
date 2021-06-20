@@ -13,13 +13,34 @@ var Path = require("@root/path");
 Path.join("foo", "../bar"); // throws error
 Path.resolve("/foo", "/bar"); // throws error
 Path.relative("/foo/bar", "/foo"); // throws error
+
+// unsafe is an alias to require('path'), for convenience;
+Path.unsafe.join("foo", "../bar"); // does NOT throw error
 ```
+
+Use with Promises, if you prefer: \
+(not actually async, but makes error handling easier via `.catch()`):
+
+```js
+var Path = require("@root/path").promises;
+
+Path.join("foo", "../bar").catch(function (e) {
+  // give empty string rather than throwing error
+  return "";
+});
+
+await Path.unsafe.join("foo", "../bar");
+```
+
+Note: v1.x does _not_ check `fs.realpath` to resolve symbolic links. You
+probably know if you're using symbolic links, so if you're using potentially
+dangerous symbolic links, you need to check `fs.realpath` yourself.
 
 # API
 
-Same as the built-in [`path`](https://nodejs.org/api/path.html),
-but throws an error when a `join`ed, `resolve`d,
-or `relative` path is not a child of the `root`, `base`, or `from` path.
+Same as the built-in [`path`](https://nodejs.org/api/path.html), but throws an
+error when a `join`ed, `resolve`d, or `relative` path is not a child of the
+`root`, `base`, or `from` path.
 
 ```json
 {
@@ -63,7 +84,8 @@ Path.resolve("foo", "../bar"); //X /Users/me/bar
 
 ## Path.relative(from, to)
 
-Throw an error if `to` resolves outside of `from` (i.e. the path starts with `..`):
+Throw an error if `to` resolves outside of `from` (i.e. the path starts with
+`..`):
 
 ```js
 // Good
@@ -80,8 +102,8 @@ Path.relative("../foo", "bar"); // //X ../me/bar
 
 ## Extra
 
-The rest of `path`'s properties are provided for convenience,
-but their behavior is left unchanged.
+The rest of `path`'s properties are provided for convenience, but their behavior
+is left unchanged.
 
 See <https://nodejs.org/api/path.html>
 
@@ -100,6 +122,7 @@ See <https://nodejs.org/api/path.html>
 - [Path.sep](https://nodejs.org/api/path.html#path_path_sep)
 - [Path.toNamespacedPath(path)](https://nodejs.org/api/path.html#path_path_tonamespacedpath_path)
 - [Path.win32](https://nodejs.org/api/path.html#path_path_win32)
+- `Path.unsafe = require('path');`
 
-The non-wrapped methods and properties are generated automatically,
-so this module will mirror the built-in path without being republished.
+The non-wrapped methods and properties are generated automatically, so this
+module will mirror the built-in path without being republished.

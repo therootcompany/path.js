@@ -2,9 +2,12 @@
 
 const E_PARENT_PATH = "E_PARENT_PATH";
 let path = require("path");
-let Path = {};
 
+let Path = {};
 Object.keys(path).forEach(function (k) {
+  if (["join", "relative", "resolve"].includes(k)) {
+    return;
+  }
   Path[k] = path[k];
 });
 
@@ -65,6 +68,7 @@ Path.relative = function (from, to) {
   }
   return relative;
 };
+Path.unsafe = require("path");
 
 Path.promises = {
   join: async function () {
@@ -76,6 +80,12 @@ Path.promises = {
   relative: async function (from, to) {
     return Path.relative(from, to);
   },
+  unsafe: {},
 };
+Object.keys(path).forEach(function (k) {
+  Path.promises.unsafe[k] = async function () {
+    return path[k](...arguments);
+  };
+});
 
 module.exports = Path;
